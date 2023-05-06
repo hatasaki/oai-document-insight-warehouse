@@ -3,16 +3,16 @@
 This repo is Document Insight Warehouse project to extract and utilize important documents quickly from a variety of accumulated documents with Azure AI and App services.
 
 ## Architecture
-- FrontEnd
- - User access Single Page App on Static Web Apps
- - Search docs by keywords with Doc search API
- - Query on docs with Doc query API (utilizing ChatGPT for the docs)
-- Document Insight Warehouse
- - Docs stored in DB with ChatGPT created summarize on key points
-- Triggers
- - Copy docs in OneDrive to blob
- - Extract texts of docs by recognizing forms of the docs (ex. PDF to text)
- - Summarize docs by ChatGPT with pre-defined system prompt
+* FrontEnd
+    * User access Single Page App on Static Web Apps
+    * Search docs by keywords with Doc search API
+    * Query on docs with Doc query API (utilizing ChatGPT for the docs)
+* Document Insight Warehouse
+    * Docs stored in DB with ChatGPT created summarize on key points
+* Triggers
+    * Copy docs in OneDrive to blob
+    * Extract texts of docs by recognizing forms of the docs (ex. PDF to text)
+    * Summarize docs by ChatGPT with pre-defined system prompt
 
 ![Document Insight Warehouse System Diagram](img/DIWHsystemdiagram.png)
 
