@@ -1,0 +1,25 @@
+{
+  "scriptFile": "__init__.py",
+  "bindings": [
+    {
+      "type": "cosmosDBTrigger",
+      "name": "documents",
+      "direction": "in",
+      "leaseCollectionName": "leases",
+      "connectionStringSetting": "DB_DOCUMENTDB",
+      "databaseName": "<DB name>",
+      "collectionName": "<Collection name>",
+      "createLeaseCollectionIfNotExists": true,
+      "maxItemsPerInvocation": 1
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "out",
+      "name": "outputDocument",
+      "databaseName": "<DB name>",
+      "collectionName": "<Collection name>",
+      "createIfNotExists": false,
+      "connectionStringSetting": "DB_DOCUMENTDB"
+    }
+  ]
+}

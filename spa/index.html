@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenAI Search App</title>
+    <style>
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div id="search-screen">
+        <h1>OpenAI Search App</h1>
+        <input type="text" id="search-input" placeholder="検索...">
+        <button id="search-button">検索実行</button>
+        <button id="details-button" style="float: right;">詳細</button>
+        <table id="results-table" border="1" style="border-collapse: collapse">
+            <thead>
+                <tr>
+                    <th>File</th>
+                    <th>Summary</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div id="details-screen" class="hidden">
+        <button id="back-button" style="float: right;">戻る</button>
+        <h1>詳細検索</h1>
+        <textarea id="question-input" placeholder="質問入力..." cols="30" rows="3"></textarea>
+        <button id="question-button">質問</button>
+        <ul id="selected-files"></ul>
+        <div id="answer"></div>
+    </div>
+    <script>
+        document.getElementById("search-button").addEventListener("click", async () => {
+            const query = document.getElementById("search-input").value;
+            const response = await fetch(`/api/oaisearch?keyword=${encodeURIComponent(query)}`);
+            const data = await response.json();
+            const tbody = document.getElementById("results-table").querySelector("tbody");
+            tbody.innerHTML = "";
+            data.forEach(item => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `<td>${item.id}</td><td>${item.openai}</td><td><input type="checkbox" data-id="${item.id}"></td>`;
+                tbody.appendChild(tr);
+            });
+        });
+
+        document.getElementById("details-button").addEventListener("click", () => {
+            const checkboxes = Array.from(document.querySelectorAll("#results-table input[type='checkbox']"));
+            const selectedFiles = checkboxes.filter(checkbox => checkbox.checked).map(checkbox => checkbox.getAttribute("data-id"));
+            if (selectedFiles.length > 0) {
+                document.getElementById("search-screen").classList.add("hidden");
+                document.getElementById("details-screen").classList.remove("hidden");
+                const ul = document.getElementById("selected-files");
+                ul.innerHTML = "";
+                selectedFiles.forEach(file => {
+                    const li = document.createElement("li");
+                    li.textContent = file;
+                    ul.appendChild(li);
+                });
+            }
+        });
+
+        document.getElementById("back-button").addEventListener("click", () => {
+            document.getElementById("search-screen").classList.remove("hidden");
+            document.getElementById("details-screen").classList.add("hidden");
+        });
+
+        document.getElementById("question-button").addEventListener("click", async () => {
+            const question = document.getElementById("question-input").value;
+            const checkboxes = Array.from(document.querySelectorAll("#results-table input[type='checkbox']"));
+            const selectedFiles = checkboxes.filter(checkbox => checkbox.checked).map(checkbox => checkbox.getAttribute("data-id"));
+            const requestBody = {
+                text: question,
+                filenames: selectedFiles
+            };
+
+            const response = await fetch('/api//oaiquery', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+            });
+
+            const data = await response.json();
+            const answer = document.getElementById("answer");
+            answer.textContent = data.answer;
+        });
+    </script>
+</body>
+</html>

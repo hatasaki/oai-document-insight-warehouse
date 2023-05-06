@@ -1,0 +1,20 @@
+{
+  "scriptFile": "__init__.py",
+  "bindings": [
+    {
+      "name": "myblob",
+      "type": "blobTrigger",
+      "direction": "in",
+      "path": "<Blob Container name>/{name}",
+      "connection": "DOCS_STORAGE"
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "out",
+      "name": "outputDocument",
+      "databaseName": "<DB name>",
+      "collectionName": "<Collection name>",
+      "connectionStringSetting": "DB_DOCUMENTDB"
+    }
+  ]
+}
