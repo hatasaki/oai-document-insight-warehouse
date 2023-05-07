@@ -62,7 +62,8 @@ Here is brief instructions:
 9. Add following application settings to Azure Static Web Apps. (If you use AzureAD authentication)
     * AZURE_CLIENT_ID - Client ID of your AzureAD app
     * AZURE_CLIENT_SECRET - Client secrect of your AzureAD app
-10. Create a flow at Logic Apps (It is not required if you store your docs directly into the blob storage)
+10. Link the frontend Functions as linked API for Static Web Apps
+11. Create a flow at Logic Apps (It is not required if you store your docs directly into the blob storage)
     * trigger - When a file is created at your OneDrive
     * action - create a blob of the file at the blob storage
 
