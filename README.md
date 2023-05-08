@@ -4,7 +4,7 @@ This repo is Document Insight Warehouse project to extract and utilize important
 
 ## Architecture
 * FrontEnd
-    * User accesss to portal of a single page app
+    * User accesses to portal of a single page app
     * Search docs by keywords with Doc search API
     * Query on docs with Doc query API (utilizing ChatGPT for the query)
 * Document Insight Warehouse
@@ -15,6 +15,9 @@ This repo is Document Insight Warehouse project to extract and utilize important
     * Summarize docs by ChatGPT with pre-defined system message
 
 ![Document Insight Warehouse System Diagram](img/DIWHsystemdiagram.png)
+
+Detail of this app is described in [this tech blog artcile](https://qiita.com/hatasaki/items/d3e508c202ca56d4fd08).
+This article is written in Japanese text. Please use translator of your browser.
 
 ## Technology stack
 
@@ -59,7 +62,7 @@ Here is brief instructions:
     * AZURE_OPENAI_MODEL_DEPLOY - Azure OpenAI Model Deployment name
     * OPENAI_MODEL - (Optional if you use API provided by OpenAI) OpenAI model name
     * OPENAI_SYSTEM - タイトルを抽出し'Title: <タイトル>'で出力。日本語で3つの各観点とそのまとめを'point<n>:<まとめ>'で出力 (This is a sample configuration for system of ChatGPT, update based on your use case)
-9. Add following application settings to Azure Static Web Apps. (If you use AzureAD authentication)
+9. Create AzureAD app with redirect URL, and add following application settings to Azure Static Web Apps. (If you use AzureAD authentication)
     * AZURE_CLIENT_ID - Client ID of your AzureAD app
     * AZURE_CLIENT_SECRET - Client secrect of your AzureAD app
 10. Link the frontend Functions as linked API for Static Web Apps
@@ -68,7 +71,7 @@ Here is brief instructions:
     * action - create a blob of the file at the blob storage
 
 ## For non Japanese users
-In the frontend function 'oaiquery' code ```/front-functions/oaiquery/__init__.py```, System message are hard coded in the file as "Prepare answer based on following" in Japanese. It may make ChatGPT answers Japanese text. Please update the message to your favorite language.
+In the frontend function 'oaiquery' code ```/front-functions/oaiquery/__init__.py```, System message are hard coded in the file as "次の内容に基づき解答を作成する" - "Prepare answer based on following" in Japanese. It may make ChatGPT answers Japanese text. Please update the message to your favorite language.
 
 ```Python
             "messages": [
