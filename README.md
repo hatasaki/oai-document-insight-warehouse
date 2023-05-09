@@ -68,6 +68,7 @@ Here is brief instructions:
 10. Link the frontend Functions as linked API for Static Web Apps
 11. Create a flow at Logic Apps (It is not required if you store your docs directly into the blob storage)
     * trigger - When a file is created at your OneDrive
+        * Note: Not limited to OneDrive, Logic Apps can also be integrated with other services such as SharePoint and Teams, etc.
     * action - create a blob of the file at the blob storage
 
 ## For non Japanese users
