@@ -61,7 +61,7 @@ Here is brief instructions:
     * AZURE_OPENAI_API_VERSION - Azure OpenAI API version
     * AZURE_OPENAI_MODEL_DEPLOY - Azure OpenAI Model Deployment name
     * OPENAI_MODEL - (Optional if you use API provided by OpenAI) OpenAI model name
-    * OPENAI_SYSTEM - タイトルを抽出し'Title: <タイトル>'で出力。日本語で3つの各観点とそのまとめを'point<n>:<まとめ>'で出力 (This is a sample configuration for system of ChatGPT, update based on your use case)
+    * OPENAI_SYSTEM - タイトルを抽出し'Title: <タイトル>'で出力。日本語で3つの各観点とそのまとめを'point\<n\>:<まとめ>'で出力 (="Extract the title and output it as 'Title: \<title\>'. Output three points in Japanese and their summaries as 'point\<n\>:\<summary>\'" in English. This is a sample system message of ChatGPT to extract insight of docs at the blob trigger function, please change this message based on your use case)
 9. Create AzureAD app with redirect URL, and add following application settings to Azure Static Web Apps. (If you use AzureAD authentication)
     * AZURE_CLIENT_ID - Client ID of your AzureAD app
     * AZURE_CLIENT_SECRET - Client secrect of your AzureAD app
